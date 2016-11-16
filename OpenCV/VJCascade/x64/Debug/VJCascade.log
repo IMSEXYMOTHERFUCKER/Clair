@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\users\bilguun\desktop\clair\opencv\vjcascade\source.cpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  VJCascade.vcxproj -> C:\Users\Bilguun\Desktop\Clair\OpenCV\x64\Debug\VJCascade.exe
+  VJCascade.vcxproj -> C:\Users\Bilguun\Desktop\Clair\OpenCV\x64\Debug\VJCascade.pdb (Full PDB)

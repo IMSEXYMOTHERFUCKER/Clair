@@ -1,0 +1,6 @@
+﻿  Source.cpp
+c:\users\bilguun\desktop\clair\handinterface\meanshift\source.cpp(28): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\meanshift\source.cpp(29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\meanshift\source.cpp(65): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+  MeanShift.vcxproj -> C:\Users\Bilguun\Desktop\Clair\HandInterface\x64\Debug\MeanShift.exe
+  MeanShift.vcxproj -> C:\Users\Bilguun\Desktop\Clair\HandInterface\x64\Debug\MeanShift.pdb (Full PDB)

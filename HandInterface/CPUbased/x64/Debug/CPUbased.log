@@ -1,0 +1,35 @@
+﻿  VJHaar.cpp
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.h(19): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.h(28): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.h(34): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.cpp(95): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.cpp(101): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.cpp(102): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.cpp(118): warning C4244: '=': conversion from 'float' to 'uchar', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.cpp(121): warning C4244: '=': conversion from 'double' to 'uchar', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.cpp(147): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.cpp(156): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.cpp(213): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.cpp(233): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.cpp(241): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.cpp(266): warning C4244: '/=': conversion from 'float' to 'int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.cpp(267): warning C4244: '/=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Compiling...
+  Source.cpp
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.h(19): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.h(28): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.h(34): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjlbp.h(5): warning C4005: 'NumOfFeatures': macro redefinition
+  c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.h(5): note: see previous definition of 'NumOfFeatures'
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjlbp.h(6): warning C4005: 'NumOfStages': macro redefinition
+  c:\users\bilguun\desktop\clair\handinterface\cpubased\vjhaar.h(6): note: see previous definition of 'NumOfStages'
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjlbp.h(17): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjlbp.h(26): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\vjlbp.h(32): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
+c:\users\bilguun\desktop\clair\handinterface\cpubased\source.cpp(23): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\bilguun\desktop\clair\handinterface\cpubased\source.cpp(23): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\bilguun\desktop\clair\handinterface\cpubased\source.cpp(28): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
+  CPUbased.vcxproj -> C:\Users\Bilguun\Desktop\Clair\HandInterface\x64\Debug\CPUbased.exe
+  CPUbased.vcxproj -> C:\Users\Bilguun\Desktop\Clair\HandInterface\x64\Debug\CPUbased.pdb (Full PDB)

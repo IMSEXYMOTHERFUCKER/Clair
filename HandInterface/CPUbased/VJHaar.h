@@ -57,7 +57,7 @@ public:
 	VJHaar();
 	~VJHaar();
 	VJHaar(String XMLname);
-	std::vector<Rect> doTheShit(float scale, int num, int step, float jombogo, float threshold);
+	std::vector<Rect> doTheShit(float scale, int num, int step, float jombogo, float threshold, float &percentage);
 	Mat VJHaar::integrator(Mat target);
 };
 

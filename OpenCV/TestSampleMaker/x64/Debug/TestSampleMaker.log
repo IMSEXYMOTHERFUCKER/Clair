@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\users\bilguun\desktop\clair\opencv\testsamplemaker\source.cpp(12): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  TestSampleMaker.vcxproj -> C:\Users\Bilguun\Desktop\Clair\OpenCV\x64\Debug\TestSampleMaker.exe
+  TestSampleMaker.vcxproj -> C:\Users\Bilguun\Desktop\Clair\OpenCV\x64\Debug\TestSampleMaker.pdb (Full PDB)

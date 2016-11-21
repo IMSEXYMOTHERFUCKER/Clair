@@ -129,7 +129,7 @@ VJHaar::VJHaar(String XMLname)
 	}
 
 	CMarkup xml;
-	xml.Load(MCD_T("../../Datas/XMLs/BayesHandTr.xml"));
+	xml.Load(MCD_T("../../Datas/XMLs/HandBack4.xml"));
 	startIdx[0] = 0;
 	xml.FindElem(MCD_T("opencv_storage"));
 	xml.IntoElem();	
@@ -187,6 +187,14 @@ VJHaar::VJHaar(String XMLname)
 				xml.OutOfElem();
 		xml.OutOfElem();
 	xml.OutOfElem();
+	cols = 640;
+	rows = 480;
+	integral = new int*[rows];
+	for (int i = 0; i < rows; ++i)
+		integral[i] = new int[cols];
+	skinint = new int*[rows];
+	for (int i = 0; i < rows; ++i)
+		skinint[i] = new int[cols];
 }
 
 Mat VJHaar::integrator(Mat target)
@@ -196,38 +204,34 @@ Mat VJHaar::integrator(Mat target)
 	uchar *a = gtarget.data;
 	uchar *b = target.data;
 
-	cols = target.cols;
-	rows = target.rows;
-	integral = new int*[rows];
-	for (int i = 0; i < rows; ++i)
-		integral[i] = new int[cols];
-	skinint = new int*[rows];
-	for (int i = 0; i < rows; ++i)
-		skinint[i] = new int[cols];
 	for (int i = 0; i < cols; i++) { integral[0][i] = 1; skinint[0][i] = 1; }
 	for (int j = 0; j < rows; j++) { integral[j][0] = 1; skinint[j][0] = 1; }
 	//Vec3b pixel;
 	Mat grey = Mat::zeros(rows, cols, CV_8UC1);
-	int lol = 0,olo=0;
+	int lol = 0, olo = 0, total = 0;
 	for (int i = 1; i < rows; i++) {
 		lol = target.step*i; olo = cols * i;
 		for (int j = 1; j < cols; j++) {
 			uchar lb = b[lol]>>3, lg = b[lol + 1]>>3, lr = b[lol + 2]>>3;
-			/grey.at<uchar>(i, j) = (charmap[lb][lg][lr]);a[olo+j]
-			integral[i][j] = charmap[lb][lg][lr] + integral[i - 1][j] + integral[i][j - 1] - integral[i - 1][j - 1];
+			grey.at<uchar>(i, j) = (charmap[lb][lg][lr]);
+			integral[i][j] = a[olo + j] + integral[i - 1][j] + integral[i][j - 1] - integral[i - 1][j - 1];
 			skinint[i][j] = charmap[b[lol] >> 3][b[lol + 1] >> 3][b[lol + 2] >> 3] + skinint[i - 1][j] + skinint[i][j - 1] - skinint[i - 1][j - 1];
 			lol += 3;
+			total++;
 		}
 	}
+	Scalar st = sum(gtarget);
+	Scalar ss = sum(grey);
+	//std::cout << " Light: " << st[0] / total << " Skin: " << ss[0] / total<<" ";
 	return target;
 }
 
-std::vector<Rect> VJHaar::doTheShit(float scale, int num, int step, float jombogo, float threshold)
+std::vector<Rect> VJHaar::doTheShit(float scale, int num, int step, float jombogo, float threshold, float &percentage)
 {	
 	std::vector<Rect> windows;//possible windows
 	int ysize = rows-1;
 	int xsize = ysize * Xsize / Ysize;
-	threshold *= (integral[479][639] / (480 * 640));
+	threshold *= (255);
 	int lol=0,olo=0;
 	for (int i = num+1; i > 0; i--) { //each scale
 		int scaledThresh = threshold*(ysize*xsize);
@@ -266,12 +270,6 @@ std::vector<Rect> VJHaar::doTheShit(float scale, int num, int step, float jombog
 		ysize /= scale;
 		xsize /= scale;
 	}
-	std::cout << " :) "<<(olo*100 / lol)<<" :) ";
-	for (int i = 0; i < rows; ++i)
-		delete[] integral[i];
-	delete[] integral;
-	for (int i = 0; i < rows; ++i)
-		delete[] skinint[i];
-	delete[] skinint;
+	percentage=(float)(olo*100 / lol);
 	return windows;
 }

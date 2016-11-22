@@ -16,11 +16,11 @@
 using namespace std;
 class SkinUltimate
 {
-	uchar map[4][DIM][DIM][DIM];
 	float skinMap[DIM][DIM][DIM];
 	int numberS[DIM][DIM][DIM];
 	int numberN[DIM][DIM][DIM];
 public:
+	uchar map[4][DIM][DIM][DIM];
 	SkinUltimate();
 	~SkinUltimate();
 

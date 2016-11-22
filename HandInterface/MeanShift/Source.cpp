@@ -16,7 +16,9 @@ Rect window1,window2;
 bool tracking = false, printthresh = false;
 SkinUltimate convert = SkinUltimate("../../Datas/Histograms/skinU1.txt", "../../Datas/Histograms/NHistogram.txt");
 uchar map[32][32][32];
-char thresholds = -1;
+uchar thresholds = 0;
+
+int sumthresholds = 1, framenum = 1;
 
 void cvtLikeBoss(Mat &target, Mat &out) {
 	uchar *ou = out.data;
@@ -34,7 +36,7 @@ void cvtLikeBoss(Mat &target, Mat &out) {
 			sum += b*0.1 + g*0.6 + r*0.3;
 			sumskin += map[b >> 3][g >> 3][r >> 3];
 			total++;
-			if (map[b >> 3][g >> 3][r >> 3] > thresholds) {
+			if (map[b >> 3][g >> 3][r >> 3] >= thresholds) {
 				valid++;
 				//do the hsv
 				int max = g, min = g;
@@ -72,10 +74,10 @@ void cvtLikeBoss(Mat &target, Mat &out) {
 			}
 		}
 	}
-	//if (printthresh)
-	//	std::cout << "Thresh: " << (int)thresholds << " ";
-	//else
-	//	std::cout << "AccRate: " << (valid*100/total) << " Light: "<< sum/total <<" Skin: "<< sumskin/total;
+	if (printthresh)
+		std::cout << "Thresh: " << (int)thresholds << " ";
+	else
+		std::cout << "AccRate: " << (valid * 100 / total) << " ";// << " Light: " << sum / total << " Skin: " << sumskin / total;
 }
 
 void mouse(int event, int x, int y, int flags, void* h) {
@@ -86,6 +88,7 @@ void mouse(int event, int x, int y, int flags, void* h) {
 		cx1 = x; cy1 = y;
 	}
 	else if (event == EVENT_RBUTTONDOWN) {
+		thresholds = 0;
 		tracking = !tracking;
 		Mat hsv;// = convert.doIt(frame, 2);
 		int histSize = 255;
@@ -111,6 +114,9 @@ void mouse(int event, int x, int y, int flags, void* h) {
 				Scalar(255, 0, 0), 2, 8, 0);
 		}
 		cv::imshow("hist", histImage);
+		thresholds = 255;
+		std::cout << (float)(sumthresholds / framenum) << "\n";
+		sumthresholds = 1; framenum = 1;
 	}
 }
 
@@ -122,20 +128,18 @@ int main() {
 			}
 		}
 	}
-	String names[14] = { "0-0","32-0","32-32","64-0","64-32","64-64","96-0","96-32","96-64","128-0","128-32","128-64","128-96","160-96" };
-	VideoCapture cap = VideoCapture("../../Datas/TestHand/" + names[1] + ".mp4");
+	//String names[14] = { "0-0","32-0","32-32","64-0","64-32","64-64","96-0","96-32","96-64","128-0","128-32","128-64","128-96","160-96" };
+	VideoCapture cap = VideoCapture(0);//"../../Datas/TestHand/" + names[1] + ".mp4");
 	cap >> frame;
 	cv::imshow("window", frame);
 	setMouseCallback("window", mouse);
-	float reallynigga[] = { 0,255 };
+	float reallynigga[] = { 10,255 };
 	const float *range = { reallynigga };
 	int sum = 0,num=0;
-	cv::waitKey(0);
-	thresholds = 127;
+	//cv::waitKey(0);
 	int totalframe = cap.get(CAP_PROP_FRAME_COUNT);
 	while (true) {
 		cap >> frame;
-		int diffs = 0;
 	again:
 		if (frame.empty()) break;
 		char c = cv::waitKey(1);
@@ -143,7 +147,7 @@ int main() {
 		Mat hsv = Mat::zeros(frame.size(), CV_8UC1);
 		if (tracking) {
 			int tmp = thresholds;
-			thresholds = -1;
+			thresholds = 0;
 			Mat dst, hsv, hist1;
 			Mat hue = Mat::zeros(frame.size(), CV_8UC1);
 			cvtLikeBoss(frame, hue);
@@ -168,16 +172,17 @@ int main() {
 			rectangle(frame, window1, Scalar(0, 255, 0));
 			float errX = std::abs(((float)(window1.x - window2.x)) / window1.width);
 			float errY = std::abs(((float)(window1.y - window2.y)) / window1.height);
-			if ((errX > 0.01) || (errY > 0.01)) {
-				diffs++;
-				if (diffs < (totalframe*0.01)) {
-					thresholds--;
-					window2 = window1;
-					goto again;
-				}
+			if ((errX > 0.05) || (errY > 0.05)) {
+				thresholds+=2;
+				window2 = window1;
 			}
+			else {
+				thresholds++;
+			}
+			sumthresholds += thresholds;
+			framenum++;
 			//std::cout << "FAIL"<<errX<<" "<<errY;
-			//std::cout << "\n";
+			std::cout << "\n";
 		}
 		cv::imshow("window", frame);
 	}
